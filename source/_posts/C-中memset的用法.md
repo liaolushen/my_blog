@@ -10,18 +10,18 @@ categories: C++基础
 ## 错误先行
 
 就先讲讲我用这个函数给数组赋值时出现的错误先吧，下面是出错代码：
+```cpp
+#include <iostream>
+#include <cstring>
 
-    #include <iostream>
-    #include <cstring>
+using namespace std;
 
-    using namespace std;
-
-    int main() {
-        int a[5];
-        memset(a, 1, 5);
-        cout << a[0] << endl;
-    }
-
+int main() {
+    int a[5];
+    memset(a, 1, 5);
+    cout << a[0] << endl;
+}
+```
 这里我原本的期望输出是`1`，但是结果确是`16843009`。这是为什么呢？且听下面讲解。
 
 ## 官方介绍

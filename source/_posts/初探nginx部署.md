@@ -9,12 +9,12 @@ categories: 服务器配置
 
 ## 下载nginx
 我目前使用的系统是ubuntu14.04，直接通过`apt-get`安装的nginx过于老旧，不建议使用。目前最新的nginx有stable版和mainline版两种，可以根据自己的需求按照下面的方法安装：
-```bash
+{% codeblock line_number:false lang:bash %}
 # 如果要安装mainline版可以把下面一句最后的stable改成development
 add-apt-repository ppa:nginx/stable
 apt-get update
 apt-get install nginx
-```
+{% endcodeblock %}
 最后你可以试试输入`nginx -v`，如果安装成功了，应该会告诉你`nginx`的版本号
 
 ## 配置nginx
@@ -22,10 +22,10 @@ apt-get install nginx
 
 ### 配置文件的位置
 这里是我遇到的第一个坑，就是关于在哪里配置的问题，首先打开`/etc/nginx/`文件夹，网上大多教程都说直接在`nginx.conf`中进行配置，那可能时以前的nginx的配置方法。至少现在我是不推荐的，因为里面放的都是一些全局的配置信息，虽然能把配置写里面，但是如果配置很多，别人看着也很累吧。那么配置信息应该放哪呢？其实在默认的配置文件中你可以找到下面两句话：
-```bash
+{% codeblock line_number:false lang:bash %}
 include /etc/nginx/conf.d/*.conf;
 include /etc/nginx/sites-enabled/*;
-```
+{% endcodeblock %}
 如果懂`bash`脚本的人就会知道，他会默认引用`conf.d`和`sites-enabled`两个文件夹里面的配置文件信息，但是为什么要有两个文件夹呢？如果你安装的是`mainline`版的`nginx`，会发现就只包含了`conf.d`文件夹，而并没有下面那一句，甚至都已经没有了`site-enabled`文件夹。其实这是`nginx`的一个变化吧，以前的`nginx`也是只有`sites-enabled`文件夹，而没有`conf.d`。反正说这么多，就一句话——**在`conf.d`文件夹里放私人配置文件，且配置文件以`.conf`为后缀！**
 
 ### 配置出错的处理
