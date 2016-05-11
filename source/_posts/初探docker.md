@@ -19,16 +19,15 @@ $ sudo apt-get install apt-transport-https ca-certificates
 $ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 {% endcodeblock %}
 
-3. 添加`entry`到源中
+3. 添加第三方库到源中
 {% codeblock line_number:false lang:bash %}
-$ sudo touch /etc/apt/sources.list.d/docker.list
-$ sudo echo `deb https://apt.dockerproject.org/repo ubuntu-xenial main` >> /etc/apt/sources.list.d/docker.list
+$ sudo add-apt-repository "deb https://apt.dockerproject.org/repo $(lsb_release -s -c) main"
 {% endcodeblock %}
-**注意我这里使用的时ubuntu16.04，其他的版本添加的entry会有不同**
+
 
 4. 更新包信息，如果必要的话，还有清理旧仓库
 {% codeblock line_number:false lang:bash %}
-$ sudo apt-get update、
+$ sudo apt-get update
 $ sudo apt-get purge lxc-docker
 {% endcodeblock %}
 
